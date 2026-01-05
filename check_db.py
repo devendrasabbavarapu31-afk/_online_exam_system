@@ -20,9 +20,12 @@ os.makedirs("uploads", exist_ok=True)
 # ==============================
 # TWILIO CONFIG (fill real)
 # ==============================
-TWILIO_SID = "AC728a5e8fa547fb8a226b27558eae16d0"
-TWILIO_TOKEN = "9f497ec4d2518273e538142404a32988"
-TWILIO_FROM = "+12675516513"
+import os
+
+TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
+TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
+TWILIO_FROM = "+12355656"
+
 twilio = Client(TWILIO_SID, TWILIO_TOKEN)
 
 def send_sms(to, msg):
