@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard | KIET</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        /* ===== HEADER / BANNER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 22px 40px;
+            background: linear-gradient(90deg, #0b1c3d, #0f2a63);
+            color: white;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+        }
+
+        .header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+            font-weight: 700;
+            text-shadow:
+                0 0 6px rgba(255, 255, 255, 0.35),
+                0 0 14px rgba(59, 130, 246, 0.6);
+        }
+
+        .header span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: #1e293b;
+            padding: 12px 40px;
+        }
+
+        .nav a {
+            color: #e5e7eb;
+            text-decoration: none;
+            margin-right: 25px;
+            font-weight: 600;
+        }
+
+        .nav a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* ===== CONTENT ===== */
+        .container {
+            padding: 30px 40px;
+        }
+
+        .welcome {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+
+        /* ===== SECTION BOX ===== */
+        .box {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            margin-bottom: 30px;
+        }
+
+        .box h3 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+
+        /* ===== LIST ===== */
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        /* ===== LINKS ===== */
+        .btn {
+            margin-left: 12px;
+            padding: 6px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #1e40af;
+        }
+
+        .paper-link {
+            display: inline-block;
+            margin-bottom: 8px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .paper-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #6b7280;
+            background: #e5e7eb;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header img {
+                margin-bottom: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <img src="/static/logo.png" alt="KIET Logo">
+        <div>
+            <h1>KIET Group of Institutions</h1>
+            <span>Student Dashboard – Online Examination System</span>
+        </div>
+    </div>
+
+    <!-- ===== NAV ===== -->
+    <div class="nav">
+        <a href="/student/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- ===== CONTENT ===== -->
+    <div class="container">
+
+        <!-- ===== WELCOME ===== -->
+        <div class="welcome">
+            <h2>Welcome {{ student.name }} ({{ student.roll }})</h2>
+            <p>
+                <b>Year:</b> {{ student.year }} |
+                <b>Branch:</b> {{ student.branch }} |
+                <b>Section:</b> {{ student.section }}
+            </p>
+        </div>
+
+        <!-- ===== ACTIVE EXAMS ===== -->
+        <div class="box">
+            <h3>🟢 Active Exams</h3>
+
+            {% if active_exams %}
+            <ul>
+                {% for e in active_exams %}
+                <li>
+                    {{ e.branch }} – Year {{ e.year }} – Section {{ e.section }}
+                    <a class="btn" href="/student/exam/{{ e.id }}">Start Exam</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No active exams available.</p>
+            {% endif %}
+        </div>
+
+        <!-- ===== PREVIOUS PAPERS ===== -->
+        <h3>📄 Question Papers</h3>
+
+        <a href="/student/papers" style="
+     display:inline-block;
+     padding:10px 18px;
+     background:#2563eb;
+     color:white;
+     border-radius:6px;
+     text-decoration:none;
+     font-weight:bold;
+   ">
+            View Previous Question Papers
+        </a>
+
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        © KIET Group of Institutions | Online Examination System
+    </div>
+
+</body>
+
+</html>

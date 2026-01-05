@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Online Examination System | KIET</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #ffffff;
+            /* ✅ White background */
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 22px 40px;
+            background: linear-gradient(90deg, #0b1c3d, #0f2a63);
+            color: white;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+        }
+
+        .header img {
+            height: 72px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow:
+                0 0 6px rgba(255, 255, 255, 0.35),
+                0 0 14px rgba(59, 130, 246, 0.6);
+            /* ✨ Highlight */
+        }
+
+        .header span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== BANNER ===== */
+        .banner {
+            height: 260px;
+            background: linear-gradient(rgba(11, 28, 61, 0.75),
+                    rgba(15, 42, 99, 0.85)),
+                url("/static/college_banner.jpg") center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .banner h2 {
+            font-size: 38px;
+            font-weight: 700;
+            padding: 18px 35px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.45);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+        }
+
+        /* ===== CARDS ===== */
+        .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 70px 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            width: 260px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 24px 45px rgba(0, 0, 0, 0.25);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(90deg, #2563eb, #1e40af);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.6);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 18px;
+            font-size: 13px;
+            color: #6b7280;
+            background: #f1f5f9;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header img {
+                margin-bottom: 10px;
+            }
+
+            .banner h2 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <img src="/static/logo.png" alt="KIET Logo">
+        <div>
+            <h1>KIET Group of Institutions</h1>
+            <span>Online Examination System</span>
+        </div>
+    </div>
+
+    <!-- ===== BANNER ===== -->
+    <div class="banner">
+        <h2>Kakinada Institute of Engineering & Technology</h2>
+    </div>
+
+    <!-- ===== CARDS ===== -->
+    <div class="cards">
+
+        <div class="card">
+            <h3>👨‍💼 Admin</h3>
+            <p>Manage faculty, students & results</p>
+            <a href="/admin_login">Admin Login</a>
+        </div>
+
+        <div class="card">
+            <h3>👨‍🏫 Faculty</h3>
+            <p>Create exams & monitor students</p>
+            <a href="/faculty_login">Faculty Login</a>
+        </div>
+
+        <div class="card">
+            <h3>🎓 Student</h3>
+            <p>Attend exams & view results</p>
+            <a href="/student_login">Student Login</a>
+        </div>
+
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        © KIET Group of Institutions | Online Examination System
+    </div>
+
+</body>
+
+</html>

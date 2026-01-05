@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login | KIET</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #ffffff;
+            /* ✅ White background */
+            min-height: 100vh;
+        }
+
+        /* ===== BANNER ===== */
+        .banner {
+            display: flex;
+            align-items: center;
+            padding: 22px 40px;
+            background: linear-gradient(90deg, #0b1c3d, #0f2a63);
+            /* Dark blue */
+            color: white;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+        }
+
+        .banner img {
+            height: 72px;
+            margin-right: 20px;
+        }
+
+        .banner h2 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow:
+                0 0 6px rgba(255, 255, 255, 0.35),
+                0 0 14px rgba(59, 130, 246, 0.6);
+            /* ✨ Highlight */
+        }
+
+        .banner span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== LOGIN BOX ===== */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 120px);
+        }
+
+        .box {
+            width: 360px;
+            background: white;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #0f172a;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: linear-gradient(90deg, #2563eb, #1e40af);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.6);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 500px) {
+            .banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .banner img {
+                margin-bottom: 10px;
+            }
+
+            .container {
+                height: auto;
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== BANNER ===== -->
+    <div class="banner">
+        <img src="/static/logo.png" alt="KIET Logo">
+        <div>
+            <h2>KIET Group of Institutions</h2>
+            <span>Admin Login – Online Examination System</span>
+        </div>
+    </div>
+
+    <!-- ===== LOGIN FORM ===== -->
+    <div class="container">
+        <div class="box">
+            <h2>Admin Login</h2>
+
+            <!-- 🔒 LOGIC UNCHANGED -->
+            <form method="post">
+                <input name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        © KIET Group of Institutions | Online Examination System
+    </div>
+
+</body>
+
+</html>

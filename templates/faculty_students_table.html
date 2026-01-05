@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Faculty Results</title>
+</head>
+
+<body>
+
+    <h2>Results</h2>
+
+    <form method="get">
+        Year: <input name="year">
+        Branch: <input name="branch">
+        Section: <input name="section">
+        <button type="submit">Filter</button>
+    </form>
+
+    <br>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>Roll</th>
+            <th>Name</th>
+            <th>Marks</th>
+            <th>Time</th>
+        </tr>
+
+        {% for r in rows %}
+        <tr>
+            <td>{{ r.roll }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.marks }}</td>
+            <td>{{ r.submit_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

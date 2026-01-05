@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin – Exam Results</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            margin: 0;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 15px 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+        }
+
+        .header img {
+            height: 60px;
+            margin-right: 15px;
+        }
+
+        .header h2 {
+            margin: 0;
+            color: #1e3a8a;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        form input,
+        form select,
+        form button {
+            padding: 8px;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: #fff;
+        }
+
+        .top-links a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="/static/logo.png">
+        <h2>Admin – Exam Results</h2>
+    </div>
+
+    <div class="container">
+
+        <div class="top-links">
+            <a href="/admin/dashboard">⬅ Back</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <!-- FILTER -->
+        <form method="GET">
+            <input name="year" placeholder="Year" value="{{ year }}">
+            <input name="branch" placeholder="Branch" value="{{ branch }}">
+            <input name="section" placeholder="Section" value="{{ section }}">
+            <input type="date" name="date" value="{{ date }}">
+            <button type="submit">View</button>
+        </form>
+
+        <!-- DOWNLOAD -->
+        {% if rows %}
+        <br>
+        <a href="/admin/download_results?year={{year}}&branch={{branch}}&section={{section}}&date={{date}}">
+            📥 Download Excel
+        </a>
+        {% endif %}
+
+        <!-- RESULTS TABLE -->
+        <table>
+            <tr>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Branch</th>
+                <th>Section</th>
+                <th>Marks</th>
+                <th>Submitted Time</th>
+            </tr>
+
+            {% for r in rows %}
+            <tr>
+                <td>{{ r["roll"] }}</td>
+                <td>{{ r["name"] }}</td>
+                <td>{{ r["year"] }}</td>
+                <td>{{ r["branch"] }}</td>
+                <td>{{ r["section"] }}</td>
+                <td>{{ r["marks"] }}</td>
+                <td>{{ r["submit_time"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</body>
+
+</html>

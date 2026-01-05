@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exam Monitor</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px #0002;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        .submitted {
+            color: green;
+            font-weight: bold;
+        }
+
+        .writing {
+            color: orange;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Exam Monitoring</h2>
+
+    <p>
+        <b>Year:</b> {{ exam.year }} |
+        <b>Branch:</b> {{ exam.branch }} |
+        <b>Section:</b> {{ exam.section }}
+    </p>
+
+    <!-- COUNTS -->
+    <div class="stats">
+        <div class="box">
+            <h3>Total Students</h3>
+            <h2>{{ total }}</h2>
+        </div>
+        <div class="box">
+            <h3>Submitted</h3>
+            <h2 style="color:green;">{{ submitted }}</h2>
+        </div>
+        <div class="box">
+            <h3>Writing</h3>
+            <h2 style="color:orange;">{{ writing }}</h2>
+        </div>
+    </div>
+
+    <!-- STUDENT LIST -->
+    <table>
+        <tr>
+            <th>Roll</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Marks</th>
+        </tr>
+
+        {% for s in students %}
+        <tr>
+            <td>{{ s.roll }}</td>
+            <td>{{ s.name }}</td>
+            <td class="{{ 'submitted' if s.status=='SUBMITTED' else 'writing' }}">
+                {{ s.status }}
+            </td>
+            <td>
+                {% if s.marks is not none %}
+                {{ s.marks }}
+                {% else %}
+                --
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/faculty/dashboard">⬅ Back to Dashboard</a>
+
+</body>
+
+</html>

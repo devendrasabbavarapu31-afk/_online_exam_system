@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Students | Admin</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f4f6;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 16px 40px;
+            background: #0f172a;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header img {
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h3 {
+            margin-top: 0;
+            text-align: center;
+            color: #0f172a;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        select,
+        input[type="file"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 15px;
+        }
+
+        select,
+        input[type="file"] {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        .note {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #475569;
+            text-align: center;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <img src="/static/logo.png" alt="KIET Logo">
+        <h2>KIET Group of Institutions – Admin Panel</h2>
+    </div>
+
+    <!-- ===== FORM CONTAINER ===== -->
+    <div class="container">
+
+        <h3>Upload Students (Excel)</h3>
+
+        <form method="post" action="/admin/upload_students" enctype="multipart/form-data">
+
+            <label>Year</label>
+            <select name="year" required>
+                <option value="">Select Year</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select>
+
+            <label>Branch</label>
+            <select name="branch" required>
+                <option value="">Select Branch</option>
+                <option value="csm">CSM</option>
+                <option value="cai">CAI</option>
+                <option value="csd">CSD</option>
+                <option value="aid">AID</option>
+                <option value="cyber">Cyber</option>
+            </select>
+
+            <label>Section</label>
+            <select name="section" required>
+                <option value="">Select Section</option>
+                <option value="dayscholar">Day Scholar</option>
+                <option value="hostler">Hostler</option>
+            </select>
+
+            <label>Excel File</label>
+            <input type="file" name="file" accept=".xls,.xlsx" required>
+
+            <button type="submit">Upload Students</button>
+        </form>
+
+        <div class="note">
+            Excel file must contain columns: <b>roll, name, parent</b>
+        </div>
+
+        <a class="back" href="/admin/dashboard">← Back to Dashboard</a>
+    </div>
+
+</body>
+
+</html>

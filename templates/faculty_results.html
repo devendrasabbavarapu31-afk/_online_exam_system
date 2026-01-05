@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Faculty Results</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 15px 40px;
+            background: #0f172a;
+            color: white;
+        }
+
+        .header img {
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        .container {
+            padding: 30px 40px;
+        }
+
+        form select,
+        form input,
+        form button {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn.green {
+            background: #16a34a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="/static/logo.png">
+        <h2>KIET Group of Institutions – Faculty Results</h2>
+    </div>
+
+    <div class="container">
+
+        <form method="get">
+            Year:
+            <select name="year">
+                <option value="">All</option>
+                {% for i in [1,2,3,4] %}
+                <option value="{{i}}" {% if fy==i|string %}selected{% endif %}>{{i}}</option>
+                {% endfor %}
+            </select>
+
+            Branch:
+            <select name="branch">
+                <option value="">All</option>
+                <option value="csm">CSM</option>
+                <option value="cai">CAI</option>
+                <option value="csd">CSD</option>
+                <option value="aid">AID</option>
+                <option value="cyber">CYBER</option>
+                <option value="le">LE</option>
+            </select>
+
+            Section:
+            <select name="section">
+                <option value="">All</option>
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="hostler">Hostler</option>
+                <option value="dayscholar">Day Scholar</option>
+            </select>
+
+            Date:
+            <input type="date" name="date" value="{{fd}}">
+
+            <button type="submit">Filter</button>
+
+            <a class="btn green" href="/faculty/export_results?year={{fy}}&branch={{fb}}&section={{fs}}&date={{fd}}">
+                ⬇ Export Excel
+            </a>
+        </form>
+
+        <table>
+            <tr>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Date</th>
+                <th>Year</th>
+                <th>Branch</th>
+                <th>Section</th>
+            </tr>
+
+            {% for r in rows %}
+            <tr>
+                <td>{{ r.roll }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.marks }}</td>
+                <td>{{ r.submit_time }}</td>
+                <td>{{ r.year }}</td>
+                <td>{{ r.branch }}</td>
+                <td>{{ r.section }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <a href="/faculty/dashboard">⬅ Back</a>
+
+    </div>
+</body>
+
+</html>

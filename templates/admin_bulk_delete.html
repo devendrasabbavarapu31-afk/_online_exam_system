@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bulk Delete Students</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #434cf6;
+        }
+
+        .box {
+            width: 420px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #dc2626;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h2>Bulk Delete Students</h2>
+
+        <form method="post">
+            <select name="year" required>
+                <option value="">Select Year</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+
+            <select name="branch" required>
+                <option value="">Select Branch</option>
+                <option>csm</option>
+                <option>cai</option>
+                <option>csd</option>
+                <option>aid</option>
+                <option>cyber</option>
+                <option>le</option>
+            </select>
+
+            <select name="section">
+                <option value="">All Sections / LE</option>
+                <option>hosteller</option>
+                <option>dayscholar</option>
+            </select>
+
+            <button onclick="return confirm('Delete students permanently?')">
+                ❌ Delete Students
+            </button>
+        </form>
+
+        <a href="/admin/dashboard">⬅ Back to Dashboard</a>
+    </div>
+
+</body>
+
+</html>

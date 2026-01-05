@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Previous Question Papers</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f6f8;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 16px 40px;
+            background: linear-gradient(90deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        .header img {
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        .container {
+            padding: 30px 40px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        form {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        select,
+        input {
+            padding: 6px;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        a.download {
+            background: #2563eb;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="/static/logo.png">
+        <h2>KIET Group of Institutions – Previous Question Papers</h2>
+    </div>
+
+    <div class="container">
+
+        <form method="get">
+            Year:
+            <select name="year">
+                <option value="{{ student.year }}">{{ student.year }}</option>
+            </select>
+
+            Branch:
+            <select name="branch">
+                <option value="{{ student.branch }}">{{ student.branch|upper }}</option>
+            </select>
+
+            Section:
+            <select name="section">
+                <option value="{{ student.section }}">{{ student.section }}</option>
+            </select>
+
+            Date:
+            <input type="date" name="date">
+
+            <button type="submit">Filter</button>
+            <a href="/student/papers">Reset</a>
+        </form>
+
+        {% if papers %}
+        <table>
+            <tr>
+                <th>Exam ID</th>
+                <th>Year</th>
+                <th>Branch</th>
+                <th>Section</th>
+                <th>Date</th>
+                <th>Download</th>
+            </tr>
+
+            {% for p in papers %}
+            <tr>
+                <td>{{ p.exam_id }}</td>
+                <td>{{ p.year }}</td>
+                <td>{{ p.branch }}</td>
+                <td>{{ p.section }}</td>
+                <td>{{ p.exam_date }}</td>
+                <td>
+                    <a href="/student/paper/{{ p.exam_id }}">⬇ Download</a>
+
+
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No papers available yet.</p>
+        {% endif %}
+
+        <br>
+        <a href="/student/dashboard">⬅ Back to Dashboard</a>
+
+    </div>
+
+</body>
+
+</html>

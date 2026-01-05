@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Online Examination</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f3f4f6;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 16px 40px;
+            background: linear-gradient(90deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        .header img {
+            height: 65px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .header span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== TIMER ===== */
+        .timer-bar {
+            background: #111827;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .timer {
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        /* ===== CONTENT ===== */
+        .container {
+            padding: 30px 40px;
+        }
+
+        .question {
+            background: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .options label {
+            display: block;
+            padding: 6px;
+            cursor: pointer;
+        }
+
+        .submit-box {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .submit-box button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .submit-box button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+    </style>
+
+    <script>
+        let totalSeconds = {{ duration }} * 60;
+        let submitted = false;
+
+        function manualSubmit() {
+            if (submitted) return;
+            submitted = true;
+
+            const btn = document.getElementById("submitBtn");
+            btn.disabled = true;
+            btn.innerText = "Submitting…";
+
+            document.getElementById("examForm").submit();
+        }
+
+        function startTimer() {
+            const timerEl = document.getElementById("timer");
+
+            const interval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(interval);
+                    alert("Time is up! Exam auto-submitted.");
+                    manualSubmit();
+                    return;
+                }
+
+                let minutes = Math.floor(totalSeconds / 60);
+                let seconds = totalSeconds % 60;
+
+                timerEl.textContent =
+                    minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+
+                totalSeconds--;
+            }, 1000);
+        }
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                alert("Tab switch detected! Exam auto-submitted.");
+                manualSubmit();
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            startTimer();
+            document.documentElement.requestFullscreen().catch(() => { });
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <img src="/static/logo.png" alt="Logo">
+        <div>
+            <h1>KIET Group of Institutions</h1>
+            <span>Online Examination System</span>
+        </div>
+    </div>
+
+    <!-- TIMER -->
+    <div class="timer-bar">
+        <div>📝 Exam in Progress</div>
+        <div>⏱ Time Left: <span class="timer" id="timer"></span></div>
+    </div>
+
+    <!-- EXAM -->
+    <div class="container">
+        <form method="post" id="examForm">
+
+            {% for q in questions %}
+            <div class="question">
+                <h3>{{ loop.index }}. {{ q.question }}</h3>
+
+                <div class="options">
+                    <label><input type="radio" name="{{ q.id }}" value="a"> {{ q.a }}</label>
+                    <label><input type="radio" name="{{ q.id }}" value="b"> {{ q.b }}</label>
+                    <label><input type="radio" name="{{ q.id }}" value="c"> {{ q.c }}</label>
+                    <label><input type="radio" name="{{ q.id }}" value="d"> {{ q.d }}</label>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="submit-box">
+                <button id="submitBtn" type="button" onclick="manualSubmit()">
+                    Submit Exam
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="footer">
+        © KIET Group of Institutions | Online Examination System
+    </div>
+
+</body>
+
+</html>

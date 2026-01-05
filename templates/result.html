@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exam Result</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        /* ===== TOP BANNER ===== */
+        .header {
+            background: #0b5ed7;
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            height: 45px;
+            margin-right: 15px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        /* ===== RESULT CARD ===== */
+        .result-box {
+            width: 420px;
+            margin: 70px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .result-box h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .marks {
+            font-size: 48px;
+            font-weight: bold;
+            color: #198754;
+            margin: 15px 0;
+        }
+
+        .info {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 22px;
+            background: #0b5ed7;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #084298;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <img src="/static/logo.png" alt="College Logo">
+        <h2>Online Examination System</h2>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-box">
+        <h3>🎉 Exam Completed Successfully</h3>
+
+        <div class="marks">
+            {{ marks }}
+        </div>
+
+        <div class="info">
+            Your exam has been submitted successfully.<br>
+            Result has been recorded.
+        </div>
+
+        <a href="/student/dashboard" class="btn">
+            ⬅ Back to Dashboard
+        </a>
+    </div>
+
+</body>
+
+</html>

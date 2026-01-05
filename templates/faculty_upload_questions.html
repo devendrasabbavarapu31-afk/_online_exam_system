@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Import Questions | KIET</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f3f4f6;
+        }
+
+        /* ===== HEADER / BANNER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 18px 40px;
+            background: linear-gradient(90deg, #0f172a, #1e293b);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .header img {
+            height: 65px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .header span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 650px;
+            margin: 50px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #111827;
+            text-align: center;
+        }
+
+        p {
+            font-size: 14px;
+            color: #374151;
+        }
+
+        pre {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            border-left: 5px solid #2563eb;
+            overflow-x: auto;
+        }
+
+        /* ===== FORM ===== */
+        form {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            background: #f9fafb;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 26px;
+            background: linear-gradient(90deg, #2563eb, #1e40af);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
+        }
+
+        /* ===== BACK LINK ===== */
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header img {
+                margin-bottom: 10px;
+            }
+
+            .container {
+                margin: 30px 15px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <img src="/static/logo.png" alt="KIET Logo">
+        <div>
+            <h1>KIET Group of Institutions</h1>
+            <span>Faculty – Import Exam Questions</span>
+        </div>
+    </div>
+
+    <!-- ===== CONTENT ===== -->
+    <div class="container">
+
+        <h2>Import Questions (Excel)</h2>
+
+        <p><b>📄 Excel format must be exactly like this:</b></p>
+
+        <pre>
+question | a | b | c | d | correct
+        </pre>
+
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".xlsx" required>
+            <br>
+            <button type="submit">⬆ Upload Questions</button>
+        </form>
+
+        <a class="back" href="/faculty/dashboard">⬅ Back to Dashboard</a>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        © KIET Group of Institutions | Online Examination System
+    </div>
+
+</body>
+
+</html>

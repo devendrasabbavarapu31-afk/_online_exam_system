@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Exam</title>
+
+    <!-- ===== STYLES ===== -->
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f3f4f6;
+        }
+
+        /* ===== HEADER / BANNER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 16px 40px;
+            background: linear-gradient(90deg, #0f172a, #1e293b);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .header img {
+            height: 65px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .header span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== CONTENT ===== */
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #111827;
+        }
+
+        select,
+        input {
+            padding: 8px 10px;
+            width: 220px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 18px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        ul {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        li {
+            padding: 6px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #dc2626;
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- ===== JS (UNCHANGED) ===== -->
+    <script>
+        function toggleSection() {
+            const branch = document.getElementById("branch").value;
+            const sectionDiv = document.getElementById("sectionDiv");
+
+            if (branch === "le") {
+                sectionDiv.style.display = "none";
+            } else {
+                sectionDiv.style.display = "block";
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- ===== BANNER ===== -->
+    <div class="header">
+        <img src="/static/logo.png" alt="KIET Logo">
+        <div>
+            <h1>KIET Group of Institutions</h1>
+            <span>Faculty – Create Examination</span>
+        </div>
+    </div>
+
+    <!-- ===== CONTENT ===== -->
+    <div class="container">
+
+        <h2>Create Exam</h2>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="post">
+
+            <!-- YEAR -->
+            Year:
+            <select name="year" required>
+                <option value="">Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <br><br>
+
+            <!-- BRANCH -->
+            Branch:
+            <select name="branch" id="branch" onchange="toggleSection()" required>
+                <option value="">Select</option>
+                <option value="csm">CSM</option>
+                <option value="cai">CAI</option>
+                <option value="csd">CSD</option>
+                <option value="aid">AID</option>
+                <option value="cyber">CYBER</option>
+                <option value="le">LE</option>
+            </select>
+            <br><br>
+
+            <!-- SECTION -->
+            <div id="sectionDiv">
+                Section:
+                <select name="section">
+                    <option value="dayscholar">Day Scholar</option>
+                    <option value="hostler">Hostler</option>
+                </select>
+                <br><br>
+            </div>
+
+            {% if students %}
+            <h3>Students ({{ students|length }})</h3>
+
+            <ul>
+                {% for s in students %}
+                <li>{{ s.roll }} — {{ s.name }}</li>
+                {% endfor %}
+            </ul>
+
+            <br>
+
+            Duration (minutes):
+            <input name="duration" required>
+            <br><br>
+
+            <button type="submit">✅ Create Exam</button>
+
+            {% else %}
+            <button type="submit" name="preview">🔍 Load Students</button>
+            {% endif %}
+
+        </form>
+
+        <a class="back" href="/faculty/dashboard">⬅ Back to Dashboard</a>
+
+    </div>
+
+</body>
+
+</html>

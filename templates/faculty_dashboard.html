@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f3f4f6;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 18px 40px;
+            background: linear-gradient(90deg, #0f172a, #1e293b);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .header span {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ===== NAV BAR ===== */
+        .nav {
+            background: #1e293b;
+            padding: 12px 40px;
+        }
+
+        .nav a {
+            color: #e5e7eb;
+            text-decoration: none;
+            margin-right: 30px;
+            font-weight: 600;
+        }
+
+        .nav a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* ===== CONTENT ===== */
+        .container {
+            padding: 30px 40px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        /* ===== TABLE ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        th {
+            background: #e5e7eb;
+            padding: 14px;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f9fafb;
+        }
+
+        /* ===== STATUS ===== */
+        .status-active {
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .status-inactive {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        /* ===== ACTION BUTTONS ===== */
+        .actions a {
+            margin: 0 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 4px 6px;
+            border-radius: 4px;
+        }
+
+        .upload {
+            color: #7c3aed;
+        }
+
+        .start {
+            color: #16a34a;
+        }
+
+        .monitor {
+            color: #2563eb;
+        }
+
+        .delete {
+            color: #dc2626;
+        }
+
+        .end {
+            color: #f97316;
+            border: 1px solid #f97316;
+        }
+
+        .upload:hover,
+        .start:hover,
+        .monitor:hover,
+        .delete:hover,
+        .end:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <img src="/static/logo.png" alt="KIET Logo">
+        <div>
+            <h1>KIET Group of Institutions</h1>
+            <span>Online Examination System – Faculty Dashboard</span>
+        </div>
+    </div>
+
+    <!-- ===== NAV ===== -->
+    <div class="nav">
+        <a href="/faculty/create_exam">➕ Create Exam</a>
+        <a href="/faculty/results">📊 Results</a>
+        <a href="/logout">🚪 Logout</a>
+    </div>
+
+    <!-- ===== CONTENT ===== -->
+    <div class="container">
+
+        <h2>My Exams</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Year</th>
+                <th>Branch</th>
+                <th>Section</th>
+                <th>Students</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for e in exams %}
+            <tr>
+                <td>{{ e.id }}</td>
+                <td>{{ e.year }}</td>
+                <td>{{ e.branch }}</td>
+                <td>{{ e.section }}</td>
+                <td>{{ e.student_count }}</td>
+
+                <td>
+                    {% if e.status == 'ACTIVE' %}
+                    <span class="status-active">ACTIVE</span>
+                    {% else %}
+                    <span class="status-inactive">INACTIVE</span>
+                    {% endif %}
+                </td>
+
+                <td class="actions">
+
+                    {% if e.status == 'INACTIVE' and e.emp_id == session['faculty'] %}
+                    <a class="upload" href="/faculty/upload_questions/{{ e.id }}">📥 Upload</a>
+                    <a class="start" href="/faculty/start_exam/{{ e.id }}">▶ Start</a>
+                    {% endif %}
+
+                    {% if e.status == 'ACTIVE' and e.emp_id == session['faculty'] %}
+                    <a class="end" href="/faculty/end_exam/{{ e.id }}" onclick="return confirm('End this exam now?')">
+                        ⏹ End
+                    </a>
+                    {% endif %}
+
+                    <a class="monitor" href="/faculty/monitor/{{ e.id }}">👀 Monitor</a>
+
+                    {% if e.emp_id == session['faculty'] %}
+                    <a class="delete" href="/faculty/delete_exam/{{ e.id }}"
+                        onclick="return confirm('Delete this exam permanently?')">
+                        🗑 Delete
+                    </a>
+                    {% endif %}
+
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        © KIET Group of Institutions | Online Examination System
+    </div>
+
+</body>
+
+</html>

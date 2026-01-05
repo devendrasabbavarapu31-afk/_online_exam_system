@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Student</title>
+</head>
+
+<body>
+
+    <h2>✏ Edit Student</h2>
+
+    <form method="POST">
+        Roll: <b>{{ s.roll }}</b><br><br>
+
+        Name:
+        <input name="name" value="{{ s.name }}" required><br><br>
+
+        Parent Mobile:
+        <input name="parent" value="{{ s.parent }}" required><br><br>
+
+        Year:
+        <input name="year" value="{{ s.year }}" required><br><br>
+
+        Branch:
+        <input name="branch" value="{{ s.branch }}" required><br><br>
+
+        Section:
+        <input name="section" value="{{ s.section }}" required><br><br>
+
+        <button>💾 Update</button>
+    </form>
+
+    <br>
+    <a href="/admin/students">⬅ Back</a>
+
+</body>
+
+</html>
