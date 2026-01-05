@@ -38,11 +38,12 @@ def db():
 # TWILIO CONFIG
 # =========================
 import os
+from twilio.rest import Client
 
-TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
-TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
+TWILIO_SID = os.getenv("TWILIO_SID")
+TWILIO_TOKEN = os.getenv("TWILIO_TOKEN")
+TWILIO_FROM = os.getenv("TWILIO_FROM")
 
-TWILIO_FROM = "+12355656"
 twilio = Client(TWILIO_SID, TWILIO_TOKEN)
 
 def send_sms(to, msg):
